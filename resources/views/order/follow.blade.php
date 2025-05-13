@@ -1,3 +1,4 @@
+<input type="hidden" value="{{ $order->id }}" id="orderId">
 <x-app-layout>
     <!DOCTYPE html>
     <html lang="en">
@@ -61,7 +62,16 @@
                 @endforeach
               </ul>
         </div>
-    </body> 
+    </body>
+    <x-slot name="scripts">
+        {{-- Đưa orderId lên window --}}
+        <script>
+            window.orderId = document.getElementById('orderId').value;
+        </script>
+
+        {{-- Nạp bundle JS (bootstrap.js + echo.js) --}}
+        @vite(['resources/js/app.js'])
+    </x-slot> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     </html>
     </x-app-layout> 

@@ -82,17 +82,15 @@ class OrderController extends Controller
     public function follow($id){
         $order = Order::findOrFail($id);
         $orderSteps = [
-            'first' =>['label'=>'Chờ xác nhận','date'=>$order->created_at],
-            'second'=>['label'=>'Chờ giao hàng','date'=>$order->confirmed_at],
-            'third'=>['label'=>'Đang giao hàng','date'=>$order->shipping_at],
-            'forth'=>['label'=>'Success','date'=>$order->updated_at],
+            'Chờ xác nhận' =>['label'=>'Chờ xác nhận','date'=>$order->created_at],
+            'Chờ giao hàng'=>['label'=>'Chờ giao hàng','date'=>$order->confirmed_at],
+            'Đang giao hàng'=>['label'=>'Đang giao hàng','date'=>$order->shipping_at],
+            'Success'=>['label'=>'Success','date'=>$order->updated_at],
         ];
         $key = array_keys($orderSteps);
         $current = array_search($order->status,$key,true);
 
-        $step = array_slice(
-            $orderSteps,0,$current + 1,true
-        );
+        $step = array_slice($orderSteps, 0, $current + 1);
         return view('order.follow',compact('order','step'));
     }
 

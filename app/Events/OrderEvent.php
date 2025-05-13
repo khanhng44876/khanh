@@ -33,14 +33,14 @@ class OrderEvent
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('order'.$this->order->user_id),
+            new PrivateChannel('order'.$this->order->id),
         ];
     }
 
     public function broadcastWith() : array
     {
         return [
-            'message'=>'Thành công'
+            'message'=>'thành công'
         ];
     }
 }

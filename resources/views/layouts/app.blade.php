@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <meta name="user-id" content="{{ auth()->id() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -32,6 +32,11 @@
                 {{ $slot }}
             </main>
         </div>
+        @vite(['resources/js/bootstrap.js'])
 
+        {{-- Scripts slot for page-specific JS --}}
+        @isset($scripts)
+            {{ $scripts }}
+        @endisset
     </body>
 </html>

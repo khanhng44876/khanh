@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::routes(['middleware' => ['web','auth']]);
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('order.{orderId}', function ($user, $orderId) {
+    if ($user->id === Order::find($orderId)->user_id) {
+        return true;
+    }
+    return $user->role === 'admin';
 });
 
-Broadcast::channel('order.{id}',function($user,$id){
-    return (int) $user->id === (int) $id;
-});
